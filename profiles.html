@@ -34,6 +34,10 @@
     </nav>
     <div class="container">
         <h1>Listes des profiles</h1>
+        <div class="row mb-3">
+            <input onkeyup="filter()" id="search" class="form-control" type="text"
+                placeholder="Rechercher un utilisateur par son nom" />
+        </div>
         <div class="row row-cols-4 grid text-center" id="profiles" style="--bs-columns:3;"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

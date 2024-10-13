@@ -1,5 +1,12 @@
+let allUsers = [];
+
 function handleItem(items) {
-    console.log(items);
+    allUsers = items;
+    //appelle la fonction displayItems(items) pour afficher les users
+    displayItems(items)
+}
+
+function displayItems(items) {
 
     //destructuration
     items = items.map(
@@ -43,4 +50,44 @@ function display() {
     fetch(URL)
         .then((response) => response.json())
         .then((items) => handleItem(items));
+}
+
+//veriffie si les carracteres de l'utilisateur saissie dans query correspondent au nom de l'utilisateur
+//(name.toLowerCase().indexOf(query.toLowerCase()) > -1)== compare le user au nom saissie par l'utilisateur
+//c'est aussiune fonction classique
+function check(user, query) {
+    const { name } = user;
+    if (name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+        return true;
+    }
+    return false;
+}
+
+//fonction stoker mais meme fonction(role) avec check
+const checkUser = function (user, query) {
+    const { name } = user;
+    return (name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+}
+
+
+//fonction flecher mais meme fonction(role) avec check
+const checkOnUser = (user, query) => {
+    const { name } = user;
+    return (name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+}
+
+
+//cette fonction va toujours recuperer un user puis le transmettre a la fonction check qui veriffie enfin affiche le user
+function filter() {
+    const query = document.getElementById("search").value;
+    const userToDisplay = allUsers.filter((user) => checkUser(user, query));
+    displayItems(userToDisplay);
+}
+
+//autre facon de filter
+function filters() {
+    const query = document.getElementById("search").value;
+    const userToDisplay = allUsers.filter(
+        ({ name }) => name.toLowerCase().includes(query.toLowerCase()));
+    displayItems(userToDisplay);
 }
